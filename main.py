@@ -70,6 +70,7 @@ def main():
         # Format the output string
         output += f"- [{title} Season {season} Episode {number} – {episode_title}](https://www.themoviedb.org/tv/{tmdb_id}-{slug}/season/{season}/episode/{number}) {watched_at_date.strftime('%a, %b %d %Y')}\n"
 
+    print(output)
     pyperclip.copy(output)
 
 if __name__ == "__main__":
