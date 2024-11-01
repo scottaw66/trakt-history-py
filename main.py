@@ -46,9 +46,9 @@ def main():
         watched_at_date = datetime.fromisoformat(watched_at.replace("Z", "+00:00"))
         
         # Format the output string
-        output += f"- [{title}](https://www.themoviedb.org/movie/{tmdb_id}-{slug}) {watched_at_date.strftime('%a, %b %d %Y')}\n"
+        output += f"- [{title}](https://www.themoviedb.org/movie/{tmdb_id}-{slug})\n"
         
-    output += "### TV Shows\n\n"
+    output += "\n### TV Shows\n\n"
     start_from_date = (datetime.now() - timedelta(days=SHOW_HISTORY_DAYS)).strftime("%Y-%m-%d")
     show_history = me.get_history_shows(start_date=start_from_date)
     
@@ -68,7 +68,7 @@ def main():
         watched_at_date = datetime.fromisoformat(watched_at.replace("Z", "+00:00"))
 
         # Format the output string
-        output += f"- [{title} Season {season} Episode {number} – {episode_title}](https://www.themoviedb.org/tv/{tmdb_id}-{slug}/season/{season}/episode/{number}) {watched_at_date.strftime('%a, %b %d %Y')}\n"
+        output += f"- [{title} Season {season} Episode {number} – {episode_title}](https://www.themoviedb.org/tv/{tmdb_id}-{slug}/season/{season}/episode/{number})\n"
 
     print(output)
     pyperclip.copy(output)
