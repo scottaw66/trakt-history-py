@@ -36,7 +36,6 @@ def main():
     start_from_date = (datetime.now() - timedelta(days=SHOW_HISTORY_DAYS)).strftime("%Y-%m-%d")
     
     show_history = me.get_history_shows(start_date=start_from_date)
-    print(f"Show history: {show_history}\n")
     
     # Iterate over each entry and format the output
     for entry in show_history:
