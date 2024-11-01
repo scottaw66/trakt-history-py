@@ -2,6 +2,8 @@
 import os
 import argparse
 from dotenv import load_dotenv
+from datetime import datetime, timedelta
+from constants import *
 from trakt import init
 import trakt.core
 from trakt.movies import get_recommended_movies
@@ -23,16 +25,36 @@ def main():
     
     if args.auth:
         init(USERNAME_ID, client_id=CLIENT_ID, client_secret=CLIENT_SECRET, store=True)
-        exit()
         
     from trakt.users import User
     me = User(USERNAME_ID)
-    print(f"Me: {me}\n\n")
-    print(f"Watched shows: {me.watched_shows}\n\n")
-    print(f"Show watchlist: {me.watchlist_shows}\n\n")
-    print(f"Movie watchlist: {me.watchlist_movies}\n\n")
-    print(f"Stats: {me.get_stats}\n\n")
+    
+    start_from_date = (datetime.now() - timedelta(days=MOVIE_HISTORY_DAYS)).strftime("%Y-%m-%d")
 
+    print(f"Movie history: {me.get_history_movies(start_date=start_from_date)}\n")
+
+    start_from_date = (datetime.now() - timedelta(days=SHOW_HISTORY_DAYS)).strftime("%Y-%m-%d")
+    
+    show_history = me.get_history_shows(start_date=start_from_date)
+    print(f"Show history: {show_history}\n")
+    
+    # Iterate over each entry and format the output
+    for entry in show_history:
+        title = entry['title']
+        ids = entry['ids']
+        slug = ids['slug']
+        episode = entry['episode']
+        season = episode['season']
+        number = episode['number']
+        episode_title = episode['title']
+        watched_at = entry['watched_at']
+        tmdb_id = ids['tmdb']
+
+        # Format the output string
+        output = f"[{title} Season {season} Episode {number} – {episode_title}](https://www.themoviedb.org/tv/{tmdb_id}-{slug}/season/{season}/episode/{number}) {watched_at}"
+        
+        # Print the formatted output
+        print(output)
 
 if __name__ == "__main__":
     main()
