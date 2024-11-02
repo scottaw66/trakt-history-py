@@ -5,9 +5,8 @@ import pyperclip
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from constants import *
-from trakt import init
-import trakt.core
-from trakt.movies import get_recommended_movies
+from api.core import init
+import api.core
 
 def main():
     load_dotenv()
@@ -21,13 +20,13 @@ def main():
     parser.add_argument('-a', '--auth', action='store_true', help='Perform OAuth authorization')
     args = parser.parse_args()
     
-    trakt.core.AUTH_METHOD = trakt.core.OAUTH_AUTH  # Set the auth method to OAuth
-    trakt.APPLICATION_ID = APPLICATION_ID
+    api.core.AUTH_METHOD = api.core.OAUTH_AUTH  # Set the auth method to OAuth
+    api.APPLICATION_ID = APPLICATION_ID
     
     if args.auth:
         init(USERNAME_ID, client_id=CLIENT_ID, client_secret=CLIENT_SECRET, store=True)
         
-    from trakt.users import User
+    from api.users import User
     me = User(USERNAME_ID)
     
     start_from_date = (datetime.now() - timedelta(days=MOVIE_HISTORY_DAYS)).strftime("%Y-%m-%d")
