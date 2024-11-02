@@ -29,6 +29,7 @@ class User:
         for key, val in data.items():
             setattr(self, key, val)
             
+    # Written by Scott Willsey
     @get
     def get_history_movies(self, start_date=None, end_date=None):
         """Watched history for all :class:`Movie`'s in this :class:`User`'s
@@ -49,6 +50,8 @@ class User:
                 movie_data.update(movie)
                 self._history_movies.append(movie_data)
         yield self._history_movies
+        
+    # Written by Scott Willsey
     @get
     def get_history_shows(self, start_date=None):
         """Watched history for all :class:`Movie`'s in this :class:`User`'s
@@ -69,6 +72,8 @@ class User:
                 show_data.update(show)
                 self._history_shows.append(show_data)
         yield self._history_shows
+    
+    # Written by Scott Willsey
     @get
     def get_history_episodes(self, start_date=None):
         """Watched history for all :class:`Movie`'s in this :class:`User`'s

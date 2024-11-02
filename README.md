@@ -10,4 +10,4 @@ You will need your app's Client ID, Client Secret, App ID, and your username. Cr
 
 ## Acknowledgments
 
-Code in the modules and API portion of this application is from for modified from [glensc/python-pytrakt](https://github.com/glensc/python-pytrakt), which I forked to add history functionality, and then later decided to integrate directly into trakt-history-py.
+Code in the api portion of this application is from or modified from [glensc/python-pytrakt](https://github.com/glensc/python-pytrakt), which I forked to add history functionality, and then later decided to integrate directly into trakt-history-py.
